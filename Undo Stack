@@ -1,0 +1,38 @@
+import java.util.Stack;
+
+public class CommandManager {
+    private Stack<String> commandStack;
+    private Stack<String> redoStack;
+
+    public CommandManager() {
+        this.commandStack = new Stack<>();
+        this.redoStack = new Stack<>();
+    }
+
+    public void addCommand(String command) {
+        commandStack.push(command);
+        redoStack.clear(); // Clear redo stack when new command is added
+    }
+
+    public String undo() {
+        if (!commandStack.isEmpty()) {
+            String command = commandStack.pop();
+            redoStack.push(command);
+            return command;
+        }
+        return null;
+    }
+
+    public String redo() {
+        if (!redoStack.isEmpty()) {
+            String command = redoStack.pop();
+            commandStack.push(command);
+            return command;
+        }
+        return null;
+    }
+
+    public Stack<String> getCommandStack() {
+        return (Stack<String>) commandStack.clone();
+    }
+}
