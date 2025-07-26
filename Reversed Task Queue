@@ -1,0 +1,37 @@
+import java.util.LinkedList;
+
+public class ReversedTaskQueue {
+    private LinkedList<String> tasks;
+
+    public ReversedTaskQueue() {
+        this.tasks = new LinkedList<>();
+    }
+
+    public void addTask(String task) {
+        if (task.endsWith("↓")) {
+            tasks.addFirst(task);
+        } else {
+            tasks.addLast(task);
+        }
+        
+        // Keep only last 4 tasks
+        while (tasks.size() > 4) {
+            tasks.removeFirst();
+        }
+    }
+
+    public void printInReverse() {
+        LinkedList<String> reversed = new LinkedList<>();
+        for (String task : tasks) {
+            reversed.addFirst(task);
+        }
+        
+        for (String task : reversed) {
+            System.out.println(task);
+        }
+    }
+
+    public LinkedList<String> getTasks() {
+        return new LinkedList<>(tasks);
+    }
+}
