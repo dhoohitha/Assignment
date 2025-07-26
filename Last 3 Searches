@@ -1,0 +1,25 @@
+import java.util.ArrayDeque;
+
+public class SearchBox {
+    private ArrayDeque<String> searches;
+    private final int maxSize = 3;
+
+    public SearchBox() {
+        this.searches = new ArrayDeque<>(maxSize);
+    }
+
+    public void addSearchTerm(String term) {
+        if (searches.size() == maxSize) {
+            searches.removeFirst();
+        }
+        searches.addLast(term);
+    }
+
+    public ArrayDeque<String> getLastSearches() {
+        return new ArrayDeque<>(searches);
+    }
+
+    public void clearSearches() {
+        searches.clear();
+    }
+}
